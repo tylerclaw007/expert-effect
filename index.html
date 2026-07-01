@@ -1,575 +1,495 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Expert Effect — Expert-Driven HR, Culture & Resiliency</title>
-  <meta name="description" content="A vetted network of 100+ HR, organizational effectiveness, and resiliency experts. High-touch, fully customized support for small businesses, large companies, and high performers." />
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Expert Effect — Expert-Driven Solutions</title>
+<meta name="description" content="A vetted network of 100+ HR, organizational effectiveness, and stress-resiliency experts. High-touch, fully customized support for small businesses, large companies, and high performers." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.unsplash.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#141915; --ink-soft:#3A423B; --stone:#6F756B; --faint:#9AA096;
+    --bg:#F5F2EA; --bg-2:#EDE8DC; --paper:#FBF9F3;
+    --line:rgba(20,25,21,.13); --line-light:rgba(245,242,234,.16);
+    --accent:#3E6B52; --accent-deep:#2C4E3B;
+    --shadow:0 30px 80px -30px rgba(20,25,21,.28);
+    --ease:cubic-bezier(.22,.61,.36,1);
+    --container:1320px;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.6;overflow-x:hidden}
+  img{display:block;max-width:100%}
+  a{color:inherit;text-decoration:none}
+  ::selection{background:var(--accent);color:var(--paper)}
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  .serif{font-family:'Playfair Display',Georgia,serif;font-weight:400;letter-spacing:-.01em}
+  .container{max-width:var(--container);margin:0 auto;padding:0 40px}
+  .eyebrow{font-size:12px;font-weight:500;letter-spacing:.24em;text-transform:uppercase;color:var(--stone)}
+  .lead{font-size:clamp(1.15rem,1.5vw,1.35rem);line-height:1.55;color:var(--ink-soft)}
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            cream: '#FBF7EF', paper: '#F1E9DB',
-            pine: '#12352C', 'pine-deep': '#07130F', moss: '#356354',
-            clay: '#C0632E', 'clay-soft': '#E0985F', brass: '#B98A2E', ink: '#171E1A',
-          },
-          fontFamily: { display: ['Fraunces','serif'], sans: ['Inter','system-ui','sans-serif'] },
-          maxWidth: { '8xl': '90rem' },
-          letterSpacing: { tightest: '-0.04em' },
-        },
-      },
-    };
-  </script>
-  <script type="importmap">{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js" } }</script>
-  <script src="https://unpkg.com/lucide@latest"></script>
+  /* buttons */
+  .btn{display:inline-flex;align-items:center;gap:.6em;font-size:14px;font-weight:500;letter-spacing:.02em;padding:15px 26px;border-radius:100px;transition:all .5s var(--ease)}
+  .btn svg{width:15px;height:15px;transition:transform .5s var(--ease)}
+  .btn:hover svg{transform:translate(3px,-3px)}
+  .btn-solid{background:var(--ink);color:var(--paper)}
+  .btn-solid:hover{background:var(--accent-deep)}
+  .btn-ghost{border:1px solid var(--line);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--ink)}
+  .btn-light{border:1px solid var(--line-light);color:var(--paper)}
+  .btn-light:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
+  .arrow{font-size:14px}
 
-  <style>
-    html, body { background: #07130F; }
-    ::selection { background: #C0632E; color: #FBF7EF; }
-    @media (pointer: fine) { body.has-cursor, body.has-cursor * { cursor: none !important; } }
+  .textlink{display:inline-flex;align-items:center;gap:.5em;font-weight:500;font-size:15px;color:var(--accent)}
+  .textlink span{background:linear-gradient(currentColor,currentColor) 0 100%/0% 1px no-repeat;transition:background-size .5s var(--ease)}
+  .textlink:hover span{background-size:100% 1px}
 
-    .reveal { opacity: 0; transform: translateY(30px); transition: opacity 1s cubic-bezier(.16,.8,.24,1), transform 1s cubic-bezier(.16,.8,.24,1); }
-    .reveal.in { opacity: 1; transform: none; }
-    .reveal-d1 { transition-delay: .08s; } .reveal-d2 { transition-delay: .16s; } .reveal-d3 { transition-delay: .24s; }
+  /* header */
+  header{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .5s var(--ease),box-shadow .5s var(--ease),padding .5s var(--ease)}
+  header .bar{max-width:var(--container);margin:0 auto;padding:26px 40px;display:flex;align-items:center;justify-content:space-between;transition:padding .5s var(--ease)}
+  .brand{display:flex;flex-direction:column;line-height:1}
+  .brand .name{font-family:'Playfair Display',serif;font-size:23px;font-weight:500;letter-spacing:.01em}
+  .brand .name sup{font-size:9px;vertical-align:super;opacity:.6}
+  .brand .tag{font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--stone);margin-top:5px}
+  nav.links{display:flex;align-items:center;gap:38px}
+  nav.links a{font-size:13px;letter-spacing:.04em;color:var(--ink-soft);transition:color .4s}
+  nav.links a:hover{color:var(--ink)}
+  header.on-dark .brand .name,header.on-dark nav.links a{color:var(--paper)}
+  header.on-dark .brand .tag{color:rgba(251,249,243,.62)}
+  header.on-dark nav.links a:hover{color:#fff}
+  header.on-dark:not(.scrolled){background:linear-gradient(180deg,rgba(14,19,15,.5),rgba(14,19,15,0))}
+  header.on-dark .brand .name,header.on-dark nav.links a,header.on-dark .brand .tag{text-shadow:0 1px 18px rgba(0,0,0,.35)}
+  header.scrolled{background:rgba(245,242,234,.86);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+  header.scrolled .bar{padding-top:16px;padding-bottom:16px}
+  header.scrolled .brand .name,header.scrolled nav.links a{color:var(--ink)}
+  header.scrolled .brand .tag{color:var(--stone)}
+  .menu-btn{display:none;background:none;border:0;color:inherit;cursor:pointer}
+  .nav-cta{padding:11px 22px;border:1px solid currentColor;border-radius:100px;font-size:13px;letter-spacing:.03em;opacity:.95;transition:all .4s}
+  header:not(.scrolled).on-dark .nav-cta{color:var(--paper)}
+  .nav-cta:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  header.on-dark:not(.scrolled) .nav-cta:hover{background:var(--paper);color:var(--ink);border-color:var(--paper)}
 
-    #cur, #curDot { position: fixed; top: 0; left: 0; z-index: 90; pointer-events: none; border-radius: 9999px; will-change: transform; mix-blend-mode: difference; }
-    #cur { width: 40px; height: 40px; border: 1.5px solid #fff; transition: width .25s, height .25s; }
-    #curDot { width: 6px; height: 6px; background: #fff; }
-    body.cur-lg #cur { width: 76px; height: 76px; }
+  /* hero */
+  .hero{position:relative;height:100svh;min-height:640px;overflow:hidden;background:#1a2320}
+  .hero-img{position:absolute;inset:0}
+  .hero-img img{width:100%;height:100%;object-fit:cover;animation:kb 24s ease-out both}
+  @keyframes kb{from{transform:scale(1.08)}to{transform:scale(1)}}
+  .hero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,25,21,.12) 0%,rgba(20,25,21,0) 26%,rgba(20,25,21,0) 45%,rgba(20,25,21,.62) 100%)}
+  .hero-inner{position:relative;z-index:2;height:100%;max-width:var(--container);margin:0 auto;padding:0 40px;display:flex;flex-direction:column;justify-content:flex-end;padding-bottom:64px}
+  .hero h1{color:var(--paper);font-weight:400;font-size:clamp(2.6rem,6vw,6rem);line-height:1;letter-spacing:-.02em;max-width:14ch;text-shadow:0 2px 40px rgba(10,14,11,.35)}
+  .hero h1 em{font-style:italic;color:#EEE7D6}
+  .hero .eyebrow{color:#fff;margin-bottom:26px;text-shadow:0 1px 2px rgba(10,14,11,.6),0 1px 22px rgba(10,14,11,.55)}
+  .hero .sub{margin-top:26px;max-width:min(44ch,100%);color:rgba(251,249,243,.88);font-size:clamp(1rem,1.3vw,1.2rem);text-shadow:0 1px 24px rgba(10,14,11,.45)}
+  .hero-actions{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
+  .scrollcue{position:absolute;right:40px;bottom:64px;z-index:2;display:flex;align-items:center;gap:10px;color:rgba(251,249,243,.7);font-size:11px;letter-spacing:.2em;text-transform:uppercase}
+  .scrollcue .dot{width:34px;height:34px;border:1px solid rgba(251,249,243,.4);border-radius:50%;display:grid;place-items:center}
+  .scrollcue .dot span{width:1px;height:12px;background:rgba(251,249,243,.7);animation:cue 1.8s var(--ease) infinite}
+  @keyframes cue{0%{transform:translateY(-4px);opacity:0}40%{opacity:1}100%{transform:translateY(6px);opacity:0}}
 
-    #prog { position: fixed; top: 0; left: 0; height: 2px; width: 0; z-index: 100; background: #E0985F; }
+  /* section scaffolding */
+  section{position:relative}
+  .pad{padding:clamp(88px,13vw,180px) 0}
+  .pad-b{padding-bottom:clamp(88px,13vw,180px)}
+  .index-tag{font-size:12px;letter-spacing:.24em;text-transform:uppercase;color:var(--faint)}
 
-    .kenburns { animation: kb 26s ease-in-out infinite alternate; }
-    @keyframes kb { from { transform: scale(1.06) translate(0,0); } to { transform: scale(1.18) translate(-2%,-2%); } }
-    .marquee { animation: marquee 42s linear infinite; }
-    @keyframes marquee { to { transform: translateX(-50%); } }
-    .float { animation: float 8s ease-in-out infinite; }
-    @keyframes float { 50% { transform: translateY(-16px); } }
-    .grain { background-image: radial-gradient(rgba(251,247,239,.05) 1px, transparent 1px); background-size: 22px 22px; }
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity 1.1s var(--ease),transform 1.1s var(--ease)}
+  .reveal.in{opacity:1;transform:none}
+  .d1{transition-delay:.09s}.d2{transition-delay:.18s}.d3{transition-delay:.27s}
 
-    .link-underline { background-image: linear-gradient(currentColor,currentColor); background-size: 0% 1.5px; background-position: 0 100%; background-repeat: no-repeat; transition: background-size .4s cubic-bezier(.16,.8,.24,1); }
-    .link-underline:hover { background-size: 100% 1.5px; }
+  /* intro statement */
+  .statement{display:grid;grid-template-columns:1fr;gap:48px}
+  .statement h2{font-weight:400;font-size:clamp(2rem,3.9vw,3.6rem);line-height:1.08;letter-spacing:-.02em;max-width:20ch}
+  .statement h2 em{font-style:italic;color:var(--accent)}
+  .statement .cols{display:grid;grid-template-columns:repeat(3,1fr);gap:40px;margin-top:20px}
+  .statement .cols h3{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:500;margin-bottom:8px}
+  .statement .cols p{font-size:15px;color:var(--stone);line-height:1.6}
+  .statement .cols .k{color:var(--accent);font-size:12px;letter-spacing:.2em;text-transform:uppercase;margin-bottom:14px;display:block}
 
-    .card-img { transition: transform 1.1s cubic-bezier(.16,.8,.24,1); }
-    .group:hover .card-img { transform: scale(1.06); }
+  /* solutions index */
+  .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:56px}
+  .sec-head h2{font-weight:400;font-size:clamp(2rem,4vw,3.4rem);line-height:1.04;letter-spacing:-.02em}
+  .sec-head p{max-width:34ch;color:var(--stone);font-size:15px}
+  .index-row{display:grid;grid-template-columns:70px 1.1fr 1.5fr auto;gap:28px;align-items:center;padding:34px 0;border-top:1px solid var(--line);transition:padding .5s var(--ease)}
+  .index-row:last-child{border-bottom:1px solid var(--line)}
+  .index-row .no{font-size:13px;color:var(--faint);letter-spacing:.1em}
+  .index-row .ttl{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.4vw,2.1rem);font-weight:400;transition:color .4s}
+  .index-row .desc{color:var(--stone);font-size:15px;line-height:1.55}
+  .index-row .go{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);transition:all .5s var(--ease);justify-self:end}
+  .index-row .go svg{width:16px;height:16px;transition:transform .5s var(--ease)}
+  .index-row:hover{padding-left:14px}
+  .index-row:hover .ttl{color:var(--accent)}
+  .index-row:hover .go{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  .index-row:hover .go svg{transform:translate(3px,-3px)}
 
-    @media (prefers-reduced-motion: reduce) {
-      .reveal { opacity: 1; transform: none; transition: none; }
-      .kenburns, .marquee, .float { animation: none; }
-      html { scroll-behavior: auto; }
-    }
-  </style>
+  /* full-bleed feature */
+  .feature{position:relative;height:min(88vh,860px);min-height:560px;overflow:hidden;display:flex;align-items:flex-end}
+  .feature img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .feature::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(18,24,20,.15),rgba(18,24,20,.72))}
+  .feature .fc{position:relative;z-index:2;max-width:var(--container);margin:0 auto;padding:0 40px 88px;width:100%;color:var(--paper)}
+  .feature .fc .eyebrow{color:rgba(251,249,243,.8);margin-bottom:22px}
+  .feature .fc h2{font-weight:400;font-size:clamp(2.1rem,4.4vw,4rem);line-height:1.03;letter-spacing:-.02em;max-width:18ch}
+  .feature .fc h2 em{font-style:italic}
+  .feature .fc p{margin-top:22px;max-width:46ch;color:rgba(251,249,243,.82)}
+  .feature .fc .btn{margin-top:34px}
+
+  /* split */
+  .split{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,96px);align-items:center}
+  .split .media{position:relative;border-radius:4px;overflow:hidden;aspect-ratio:4/5;box-shadow:var(--shadow)}
+  .split .media img{width:100%;height:100%;object-fit:cover;transition:transform 1.4s var(--ease)}
+  .split:hover .media img{transform:scale(1.05)}
+  .split h2{font-weight:400;font-size:clamp(1.9rem,3.4vw,3rem);line-height:1.08;letter-spacing:-.02em;margin:22px 0 0}
+  .split .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px 34px;margin-top:34px}
+  .split .grid2 .col .k{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:block;margin-bottom:14px}
+  .split .grid2 ul{list-style:none}
+  .split .grid2 li{font-size:14.5px;color:var(--ink-soft);padding:7px 0;border-bottom:1px solid var(--line)}
+  .split .actions{margin-top:36px;display:flex;gap:24px;align-items:center;flex-wrap:wrap}
+
+  /* proof / experts */
+  .proof{background:var(--ink);color:var(--paper)}
+  .proof .eyebrow{color:rgba(251,249,243,.55)}
+  .proof h2{font-weight:400;font-size:clamp(2rem,3.8vw,3.3rem);line-height:1.08;letter-spacing:-.02em;max-width:20ch;margin-top:18px}
+  .proof h2 em{font-style:italic;color:#C9B896}
+  .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:30px;margin-top:74px;border-top:1px solid var(--line-light);padding-top:52px}
+  .stats .n{font-family:'Playfair Display',serif;font-size:clamp(2.8rem,5vw,4.4rem);font-weight:400;line-height:1}
+  .stats .l{margin-top:12px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:rgba(251,249,243,.55)}
+  .affil{margin-top:72px;border-top:1px solid var(--line-light);padding-top:34px}
+  .affil .k{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:rgba(251,249,243,.5);margin-bottom:24px}
+  .affil .row{display:flex;flex-wrap:wrap;gap:18px 44px;align-items:center}
+  .affil .row span{font-family:'Playfair Display',serif;font-size:clamp(1.15rem,1.8vw,1.7rem);color:rgba(251,249,243,.72)}
+
+  /* founder */
+  .founder{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(40px,6vw,90px);align-items:center}
+  .founder .card{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:42px;box-shadow:var(--shadow)}
+  .founder .card .mono{width:74px;height:74px;border-radius:50%;background:var(--accent-deep);color:var(--paper);display:grid;place-items:center;font-family:'Playfair Display',serif;font-size:30px}
+  .founder .card h3{font-family:'Playfair Display',serif;font-size:1.7rem;font-weight:500;margin-top:26px}
+  .founder .card .role{color:var(--accent);font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin-top:6px}
+  .founder .card p{margin-top:18px;font-size:15px;color:var(--ink-soft)}
+  .founder h2{font-weight:400;font-size:clamp(2rem,3.8vw,3.2rem);line-height:1.08;letter-spacing:-.02em;margin:22px 0 0}
+  .founder .body{margin-top:24px;color:var(--ink-soft);font-size:16.5px}
+  .founder .body + .body{margin-top:16px}
+
+  /* contact */
+  .contact{background:var(--bg-2)}
+  .contact .wrap{display:grid;grid-template-columns:1fr 1fr;gap:clamp(40px,6vw,90px)}
+  .contact h2{font-weight:400;font-size:clamp(2.4rem,5vw,4.4rem);line-height:1.02;letter-spacing:-.02em}
+  .contact .detail{margin-top:34px;display:flex;flex-direction:column;gap:18px}
+  .contact .detail a{display:flex;align-items:center;gap:14px;font-size:17px}
+  .contact .detail .ic{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:all .4s}
+  .contact .detail a:hover .ic{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+  form{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:36px;box-shadow:var(--shadow)}
+  .field{margin-bottom:18px}
+  .field label{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);display:block;margin-bottom:9px}
+  .field input,.field select,.field textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:4px;padding:13px 15px;font:inherit;font-size:15px;color:var(--ink);transition:border-color .4s,box-shadow .4s}
+  .field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 3px rgba(62,107,82,.14)}
+  .field.row2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  form button{width:100%;margin-top:8px;background:var(--ink);color:var(--paper);border:0;border-radius:100px;padding:16px;font:inherit;font-size:15px;font-weight:500;cursor:pointer;transition:background .5s var(--ease)}
+  form button:hover{background:var(--accent-deep)}
+  .form-ok{margin-top:14px;text-align:center;font-size:14px;color:var(--accent);display:none}
+
+  /* footer */
+  footer{background:var(--ink);color:rgba(251,249,243,.72);overflow:hidden}
+  footer .top{display:grid;grid-template-columns:2fr 1fr 1fr;gap:40px;padding:80px 0 60px}
+  footer .brand .name{color:var(--paper)}
+  footer p.desc{margin-top:18px;max-width:38ch;font-size:15px;line-height:1.6}
+  footer .social{margin-top:24px;display:flex;gap:12px}
+  footer .social a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line-light);display:grid;place-items:center;color:var(--paper);transition:all .4s}
+  footer .social a:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
+  footer .col h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,249,243,.5);margin-bottom:18px}
+  footer .col a{display:block;padding:7px 0;font-size:15px;color:rgba(251,249,243,.72);transition:color .4s}
+  footer .col a:hover{color:var(--paper)}
+  footer .base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line-light);padding:26px 0;font-size:12px;letter-spacing:.06em;color:rgba(251,249,243,.45)}
+  footer .wordmark{font-family:'Playfair Display',serif;font-weight:500;font-size:19vw;line-height:.8;letter-spacing:-.03em;color:rgba(251,249,243,.05);text-align:center;padding-bottom:24px;white-space:nowrap}
+
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+  /* founder portrait */
+  .founder .card .portrait{width:100%;height:320px;object-fit:cover;object-position:center 22%;border-radius:4px;margin-bottom:26px}
+  /* experts collage */
+  .proof .collage{margin-top:48px;border-radius:6px;overflow:hidden;border:1px solid var(--line-light);max-height:520px}
+  .proof .collage img{width:100%;height:100%;max-height:520px;object-fit:cover;object-position:center;display:block}
+
+  /* mobile menu */
+  #mobileNav{position:fixed;inset:0;z-index:60;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:center;padding:0 32px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .5s var(--ease),transform .5s var(--ease),visibility .5s}
+  #mobileNav.open{opacity:1;visibility:visible;transform:none}
+  #mobileNav a{font-family:'Playfair Display',serif;font-size:8vw;padding:14px 0;border-bottom:1px solid var(--line-light);color:var(--paper)}
+  #mobileNav .close{position:absolute;top:24px;right:26px;background:none;border:0;color:var(--paper);cursor:pointer}
+  #mobileNav .mfoot{margin-top:38px;font-size:15px;color:rgba(251,249,243,.6)}
+
+  @media(max-width:900px){
+    .container,header .bar,.hero-inner,.feature .fc,footer .top,footer .base{padding-left:24px;padding-right:24px}
+    nav.links{display:none}
+    .menu-btn{display:block}
+    .statement .cols{grid-template-columns:1fr;gap:30px}
+    .index-row{grid-template-columns:44px 1fr auto;gap:16px}
+    .index-row .desc{display:none}
+    .split,.founder,.contact .wrap,footer .top{grid-template-columns:1fr}
+    .founder .card{order:2}
+    .stats{grid-template-columns:1fr 1fr;gap:36px 20px}
+    .split .grid2{grid-template-columns:1fr 1fr}
+    .field.row2{grid-template-columns:1fr}
+    footer .top{grid-template-columns:1fr 1fr}
+  }
+  @media(max-width:560px){ footer .top{grid-template-columns:1fr} .hero-actions{flex-direction:column;align-items:stretch} .hero-actions .btn{justify-content:center} }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important}
+    .reveal{opacity:1;transform:none;transition:none}
+    html{scroll-behavior:auto}
+  }
+</style>
 </head>
+<body>
 
-<body class="font-sans text-cream antialiased overflow-x-hidden">
-  <div id="prog"></div>
-  <div id="cur"></div><div id="curDot"></div>
+<!-- HEADER -->
+<header id="header" class="on-dark">
+  <div class="bar">
+    <a href="#top" class="brand">
+      <span class="name serif">Expert Effect<sup>®</sup></span>
+      <span class="tag">Expert-Driven Solutions</span>
+    </a>
+    <nav class="links">
+      <a href="#approach">Approach</a>
+      <a href="#solutions">Solutions</a>
+      <a href="#resiliency">Resiliency</a>
+      <a href="#experts">Experts</a>
+      <a href="#story">Story</a>
+      <a href="#contact" class="nav-cta">Book a consult</a>
+    </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button>
+  </div>
+</header>
 
-  <!-- ============ NAV ============ -->
-  <header id="nav" class="fixed top-0 inset-x-0 z-50 transition-all duration-500">
-    <div class="max-w-8xl mx-auto px-5 sm:px-8">
-      <nav class="flex items-center justify-between h-20">
-        <a href="#top" class="flex items-center gap-2.5">
-          <span class="grid place-items-center w-9 h-9 rounded-lg bg-clay text-cream font-display text-lg leading-none">E</span>
-          <span id="brand" class="font-display text-[20px] tracking-tight text-cream">Expert Effect<span class="text-clay-soft align-super text-[10px]">®</span></span>
-        </a>
-        <div id="navlinks" class="hidden lg:flex items-center gap-9 text-[15px] font-medium text-cream/75">
-          <a href="#solutions" class="link-underline">Solutions</a>
-          <a href="#hr" class="link-underline">HR</a>
-          <a href="#resiliency" class="link-underline">Resiliency</a>
-          <a href="#experts" class="link-underline">Experts</a>
-          <a href="#founder" class="link-underline">Our Story</a>
-        </div>
-        <div class="flex items-center gap-3">
-          <a href="tel:8889543373" id="navphone" class="hidden sm:inline-flex items-center gap-2 text-[15px] font-medium text-cream/80 hover:text-clay-soft transition"><i data-lucide="phone" class="w-4 h-4"></i>(888) 954-3373</a>
-          <a href="#contact" data-mag class="inline-flex items-center gap-2 rounded-full bg-clay text-cream px-5 py-2.5 text-[14px] font-semibold hover:bg-clay-soft transition shadow-lg shadow-black/20">Book a consult <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-          <button id="menuBtn" class="lg:hidden p-2 -mr-2 text-cream" aria-label="Menu"><i data-lucide="menu" class="w-6 h-6"></i></button>
-        </div>
-      </nav>
-    </div>
-    <div id="mobileMenu" class="lg:hidden hidden bg-pine-deep/95 backdrop-blur border-t border-cream/10">
-      <div class="px-6 py-5 flex flex-col gap-4 text-lg font-medium text-cream">
-        <a href="#solutions">Solutions</a><a href="#hr">HR</a><a href="#resiliency">Resiliency</a><a href="#experts">Experts</a><a href="#founder">Our Story</a><a href="#contact" class="text-clay-soft">Contact us</a>
-      </div>
-    </div>
-  </header>
+<!-- MOBILE NAV -->
+<div id="mobileNav">
+  <button class="close" id="menuClose" aria-label="Close menu"><svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <a href="#approach">Approach</a>
+  <a href="#solutions">Solutions</a>
+  <a href="#resiliency">Resiliency</a>
+  <a href="#experts">Experts</a>
+  <a href="#story">Story</a>
+  <a href="#contact">Contact</a>
+  <div class="mfoot">(888) 954-3373 &nbsp;·&nbsp; info@ExpertEffect.com</div>
+</div>
 
-  <!-- ============ HERO ============ -->
-  <section id="top" class="relative h-[100svh] min-h-[640px] overflow-hidden bg-pine-deep">
-    <div class="absolute inset-0">
-      <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?auto=format&fit=crop&w=2000&q=80" alt="" class="kenburns w-full h-full object-cover" />
-    </div>
-    <div class="absolute inset-0 bg-gradient-to-b from-pine-deep/70 via-pine-deep/40 to-pine-deep"></div>
-    <div class="absolute inset-0 bg-gradient-to-r from-pine-deep/80 via-transparent to-transparent"></div>
-    <div class="absolute inset-0 grain opacity-40"></div>
-
-    <div class="relative z-10 h-full max-w-8xl mx-auto px-5 sm:px-8 flex flex-col justify-center">
-      <span class="reveal inline-flex items-center gap-2 self-start rounded-full border border-cream/25 bg-cream/5 backdrop-blur px-4 py-1.5 text-[13px] font-medium text-cream/90">
-        <span class="w-1.5 h-1.5 rounded-full bg-clay-soft animate-pulse"></span>Expert-driven solutions since 2008
-      </span>
-      <h1 class="reveal reveal-d1 mt-7 font-display font-light text-[54px] leading-[0.95] sm:text-8xl lg:text-[104px] tracking-tightest text-cream max-w-5xl">
-        Solutions for people who <span class="italic font-normal text-clay-soft">perform.</span>
-      </h1>
-      <p class="reveal reveal-d2 mt-8 max-w-xl text-lg sm:text-xl leading-relaxed text-cream/75">
-        Human resources, organizational effectiveness, and stress-resiliency, delivered by a vetted network of 100+ seasoned experts. High-touch. Fully customized. Never off the shelf.
-      </p>
-      <div class="reveal reveal-d3 mt-10 flex flex-col sm:flex-row gap-3.5">
-        <a href="#contact" data-mag class="inline-flex items-center justify-center gap-2 rounded-full bg-clay text-cream px-8 py-4 text-[15px] font-semibold hover:bg-clay-soft transition shadow-xl shadow-black/25">Talk to an expert <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-        <a href="#solutions" data-mag class="inline-flex items-center justify-center gap-2 rounded-full border border-cream/30 bg-cream/5 backdrop-blur text-cream px-8 py-4 text-[15px] font-semibold hover:bg-cream/10 transition">Explore solutions</a>
-      </div>
-    </div>
-
-    <div class="absolute bottom-8 inset-x-0 z-10">
-      <div class="max-w-8xl mx-auto px-5 sm:px-8 flex items-end justify-between">
-        <div class="flex flex-wrap items-end gap-x-10 gap-y-3">
-          <div><div class="font-display text-3xl sm:text-4xl text-cream" data-count="100" data-suffix="+">0</div><div class="text-[12px] uppercase tracking-wider text-cream/50">Vetted experts</div></div>
-          <div class="w-px h-8 bg-cream/20 hidden sm:block"></div>
-          <div><div class="font-display text-3xl sm:text-4xl text-cream" data-count="18" data-suffix=" yrs">0</div><div class="text-[12px] uppercase tracking-wider text-cream/50">Of impact</div></div>
-          <div class="w-px h-8 bg-cream/20 hidden sm:block"></div>
-          <div><div class="font-display text-3xl sm:text-4xl text-cream" data-count="8" data-suffix="">0</div><div class="text-[12px] uppercase tracking-wider text-cream/50">Cities + virtual</div></div>
-        </div>
-        <a href="#manifesto" class="hidden md:flex items-center gap-2 text-cream/60 text-[13px] hover:text-cream transition"><i data-lucide="arrow-down" class="w-4 h-4 animate-bounce"></i>Scroll</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ MARQUEE ============ -->
-  <div class="bg-clay text-cream py-3.5 overflow-hidden">
-    <div class="flex whitespace-nowrap marquee text-lg font-display">
-      <div class="flex items-center gap-8 pr-8"><span>Human Resources</span><span class="opacity-50">/</span><span>Organizational Effectiveness</span><span class="opacity-50">/</span><span>Stress-Resiliency</span><span class="opacity-50">/</span><span>Interim Support</span><span class="opacity-50">/</span><span>Leadership Coaching</span><span class="opacity-50">/</span></div>
-      <div class="flex items-center gap-8 pr-8" aria-hidden="true"><span>Human Resources</span><span class="opacity-50">/</span><span>Organizational Effectiveness</span><span class="opacity-50">/</span><span>Stress-Resiliency</span><span class="opacity-50">/</span><span>Interim Support</span><span class="opacity-50">/</span><span>Leadership Coaching</span><span class="opacity-50">/</span></div>
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-img"><img src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2400&q=80" alt="Modern glass towers against the sky" /></div>
+  <div class="hero-inner">
+    <div class="eyebrow reveal">Est. 2008 — Los Angeles &amp; nationwide</div>
+    <h1 class="serif reveal d1">Solutions for people who <em>perform.</em></h1>
+    <p class="sub reveal d2">Human resources, organizational effectiveness, and stress-resiliency, delivered by a vetted network of 100+ seasoned experts.</p>
+    <div class="hero-actions reveal d3">
+      <a href="#contact" class="btn btn-solid">Talk to an expert <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+      <a href="#solutions" class="btn btn-light">Explore solutions</a>
     </div>
   </div>
+  <div class="scrollcue"><span>Scroll</span><span class="dot"><span></span></span></div>
+</section>
 
-  <!-- ============ MANIFESTO ============ -->
-  <section id="manifesto" class="bg-cream text-ink py-28 sm:py-40">
-    <div class="max-w-8xl mx-auto px-5 sm:px-8">
-      <div class="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
-        <div class="reveal lg:col-span-2"><span class="text-clay font-semibold text-sm tracking-[0.15em] uppercase">01 — Ethos</span></div>
-        <div class="lg:col-span-10">
-          <h2 class="reveal font-display font-light text-3xl sm:text-5xl lg:text-[56px] leading-[1.08] tracking-tight text-pine">
-            We're not a third-party HR firm keeping you at arm's length. We become an <span class="italic text-clay">integral partner</span>, matching you with the exact expert your moment calls for.
-          </h2>
-          <div class="reveal reveal-d1 mt-12 grid sm:grid-cols-3 gap-8 max-w-3xl">
-            <div><p class="font-display text-xl text-pine">Relational care</p><p class="mt-2 text-[15px] text-ink/60 leading-relaxed">Deep expertise delivered with genuine human warmth.</p></div>
-            <div><p class="font-display text-xl text-pine">Fully customized</p><p class="mt-2 text-[15px] text-ink/60 leading-relaxed">Built around your organization, never pulled off a shelf.</p></div>
-            <div><p class="font-display text-xl text-pine">Highly vetted</p><p class="mt-2 text-[15px] text-ink/60 leading-relaxed">Specialists with 12 to 25+ years in their exact field.</p></div>
-          </div>
-        </div>
+<!-- APPROACH -->
+<section class="pad" id="approach">
+  <div class="container statement">
+    <div class="index-tag reveal">(01) — Approach</div>
+    <h2 class="serif reveal d1">We don't send a third-party consultant. We become an <em>integral partner</em> and match you with the exact expert your moment calls for.</h2>
+    <div class="cols">
+      <div class="reveal d1"><span class="k">Relational care</span><h3>Warmth, not a queue</h3><p>Deep expertise delivered with genuine human care on every engagement.</p></div>
+      <div class="reveal d2"><span class="k">Fully customized</span><h3>Built for your org</h3><p>Solutions shaped around your reality, never pulled off a shelf.</p></div>
+      <div class="reveal d3"><span class="k">Highly vetted</span><h3>12–25+ years each</h3><p>Specialists with deep tenure in their exact field, not generalists.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- SOLUTIONS -->
+<section class="pad-b" id="solutions">
+  <div class="container">
+    <div class="sec-head">
+      <div>
+        <div class="index-tag reveal" style="margin-bottom:18px">(02) — What we do</div>
+        <h2 class="serif reveal d1">Four ways we help.</h2>
+      </div>
+      <p class="reveal d1">A full HR function, a single project handled, or an edge for your highest performers. You are matched with the right specialist, every time.</p>
+    </div>
+
+    <a href="#solutions" class="index-row reveal">
+      <span class="no">01</span>
+      <span class="ttl serif">HR Solutions</span>
+      <span class="desc">High-touch, fully customized human resources that flex with your team, from handbooks to hard conversations.</span>
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+    </a>
+    <a href="#solutions" class="index-row reveal">
+      <span class="no">02</span>
+      <span class="ttl serif">Interim Support</span>
+      <span class="desc">A leave, a surge, a vacancy. Drop in a seasoned HR professional to hold the line, on-site or virtual, for as long as you need.</span>
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+    </a>
+    <a href="#resiliency" class="index-row reveal">
+      <span class="no">03</span>
+      <span class="ttl serif">Organizational Effectiveness</span>
+      <span class="desc">Culture change, leadership development, and team collaboration for the C-suite, solved from the inside.</span>
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+    </a>
+    <a href="#resiliency" class="index-row reveal">
+      <span class="no">04</span>
+      <span class="ttl serif">Stress-Resiliency</span>
+      <span class="desc">For athletes, executives, and high achievers who cannot afford to falter. Train body and mind to hold up under pressure.</span>
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
+    </a>
+  </div>
+</section>
+
+<!-- FEATURE / RESILIENCY -->
+<section class="feature" id="resiliency">
+  <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=2400&q=80" alt="Aerial view of the ocean" loading="lazy" />
+  <div class="fc">
+    <div class="eyebrow reveal">(03) — Stress-Resiliency</div>
+    <h2 class="serif reveal d1">For the people the pressure <em>never lets up on.</em></h2>
+    <p class="reveal d2">Athletes, executives, celebrities, and students in visible positions where high performance is a must. We lessen the load so you live healthier and perform higher than you thought possible, in body and mind.</p>
+    <a href="#contact" class="btn btn-light reveal d2">Start your resiliency plan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+  </div>
+</section>
+
+<!-- HR SPLIT -->
+<section class="pad" id="hr">
+  <div class="container split">
+    <div class="media reveal">
+      <img src="https://images.squarespace-cdn.com/content/v1/54e2bf5ce4b08791c737b822/af46883b-b0db-420d-9e8b-bb6892173fad/Coworkers%2BCommunicating+%281%29.jpg+%281%29.jpg?format=1000w" alt="Colleagues collaborating in a meeting" loading="lazy" />
+    </div>
+    <div>
+      <div class="index-tag reveal">(04) — Human Resources</div>
+      <h2 class="serif reveal d1">Avoid the costly people mistakes before they happen.</h2>
+      <p class="lead reveal d1" style="margin-top:20px">Top-notch HR for small businesses, and hand-off expertise for the projects large teams do not have bandwidth to run.</p>
+      <div class="grid2">
+        <div class="col reveal d1"><span class="k">Small business</span><ul><li>Compliance &amp; handbooks</li><li>Onboarding &amp; records</li><li>Talent acquisition</li><li>Performance management</li><li>Benefits &amp; leaves</li></ul></div>
+        <div class="col reveal d2"><span class="k">Mid to large</span><ul><li>HR compliance audits</li><li>Compensation &amp; equity</li><li>Change management</li><li>Investigations</li><li>HRIS implementation</li></ul></div>
+      </div>
+      <div class="actions reveal d2">
+        <a href="#contact" class="btn btn-solid">Get HR support <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <a href="#contact" class="textlink"><span>Request a training workshop</span></a>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ SOLUTIONS (photo cards) ============ -->
-  <section id="solutions" class="bg-cream text-ink pb-28 sm:pb-40">
-    <div class="max-w-8xl mx-auto px-5 sm:px-8">
-      <div class="reveal flex flex-col lg:flex-row lg:items-end justify-between gap-6 border-t border-pine/10 pt-16">
-        <div class="max-w-2xl">
-          <span class="text-clay font-semibold text-sm tracking-[0.15em] uppercase">02 — What we do</span>
-          <h2 class="mt-4 font-display font-light text-4xl sm:text-6xl tracking-tight text-pine leading-[1.02]">Four ways we help.</h2>
-        </div>
-        <p class="max-w-sm text-[15px] text-ink/60">Need a full HR function, a single project handled, or an edge for your highest performers? Start here.</p>
-      </div>
-
-      <div class="mt-14 grid md:grid-cols-2 gap-6">
-        <a href="#hr" class="reveal group relative rounded-3xl overflow-hidden aspect-[16/11] bg-pine">
-          <img src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80" alt="HR consulting meeting" class="card-img absolute inset-0 w-full h-full object-cover opacity-90" />
-          <div class="absolute inset-0 bg-gradient-to-t from-pine-deep via-pine-deep/20 to-transparent"></div>
-          <div class="absolute inset-0 p-8 flex flex-col justify-end">
-            <div class="flex items-center gap-2 text-clay-soft text-sm font-semibold"><i data-lucide="users" class="w-4 h-4"></i>HR Solutions</div>
-            <h3 class="mt-2 font-display text-3xl text-cream">High-touch human resources</h3>
-            <p class="mt-2 max-w-md text-cream/75 text-[15px]">Fully customized HR that flexes with your team, from handbooks to hard conversations.</p>
-            <span class="mt-4 inline-flex items-center gap-1.5 text-cream text-sm font-semibold group-hover:gap-3 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
-          </div>
-        </a>
-
-        <a href="#hr" class="reveal reveal-d1 group relative rounded-3xl overflow-hidden aspect-[16/11] bg-pine">
-          <img src="https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=1200&q=80" alt="Interim HR support" class="card-img absolute inset-0 w-full h-full object-cover opacity-90" />
-          <div class="absolute inset-0 bg-gradient-to-t from-pine-deep via-pine-deep/20 to-transparent"></div>
-          <div class="absolute inset-0 p-8 flex flex-col justify-end">
-            <div class="flex items-center gap-2 text-clay-soft text-sm font-semibold"><i data-lucide="life-buoy" class="w-4 h-4"></i>Interim Support</div>
-            <h3 class="mt-2 font-display text-3xl text-cream">Cover the gap, hold the line</h3>
-            <p class="mt-2 max-w-md text-cream/75 text-[15px]">A leave, a surge, a vacancy. Drop in a seasoned HR pro for as long as you need.</p>
-            <span class="mt-4 inline-flex items-center gap-1.5 text-cream text-sm font-semibold group-hover:gap-3 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
-          </div>
-        </a>
-
-        <a href="#experts" class="reveal group relative rounded-3xl overflow-hidden aspect-[16/11] bg-pine">
-          <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=1200&q=80" alt="Organizational effectiveness workshop" class="card-img absolute inset-0 w-full h-full object-cover opacity-90" />
-          <div class="absolute inset-0 bg-gradient-to-t from-pine-deep via-pine-deep/20 to-transparent"></div>
-          <div class="absolute inset-0 p-8 flex flex-col justify-end">
-            <div class="flex items-center gap-2 text-clay-soft text-sm font-semibold"><i data-lucide="git-branch" class="w-4 h-4"></i>Org Effectiveness</div>
-            <h3 class="mt-2 font-display text-3xl text-cream">Culture, changed from the inside</h3>
-            <p class="mt-2 max-w-md text-cream/75 text-[15px]">Leadership development and team collaboration for the C-suite, not from the sidelines.</p>
-            <span class="mt-4 inline-flex items-center gap-1.5 text-cream text-sm font-semibold group-hover:gap-3 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
-          </div>
-        </a>
-
-        <a href="#resiliency" class="reveal reveal-d1 group relative rounded-3xl overflow-hidden aspect-[16/11] bg-pine">
-          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=1200&q=80" alt="High performer training resiliency" class="card-img absolute inset-0 w-full h-full object-cover opacity-90" />
-          <div class="absolute inset-0 bg-gradient-to-t from-pine-deep via-pine-deep/20 to-transparent"></div>
-          <div class="absolute inset-0 p-8 flex flex-col justify-end">
-            <div class="flex items-center gap-2 text-clay-soft text-sm font-semibold"><i data-lucide="activity" class="w-4 h-4"></i>Stress-Resiliency</div>
-            <h3 class="mt-2 font-display text-3xl text-cream">Built for high performers</h3>
-            <p class="mt-2 max-w-md text-cream/75 text-[15px]">For athletes, executives, and achievers who can't afford to falter under pressure.</p>
-            <span class="mt-4 inline-flex items-center gap-1.5 text-cream text-sm font-semibold group-hover:gap-3 transition-all">Learn more <i data-lucide="arrow-right" class="w-4 h-4"></i></span>
-          </div>
-        </a>
+<!-- PROOF / EXPERTS -->
+<section class="pad proof" id="experts">
+  <div class="container">
+    <div class="index-tag reveal" style="color:rgba(251,249,243,.5)">(05) — Our experts</div>
+    <h2 class="serif reveal d1">A bench this deep, matched to your <em>exact</em> need.</h2>
+    <div class="collage reveal d1"><img src="https://images.squarespace-cdn.com/content/v1/54e2bf5ce4b08791c737b822/d9637d63-5428-4503-a4f4-22926bc5e15e/Team+collage+2025.png?format=1500w" alt="The Expert Effect network of vetted specialists" loading="lazy" /></div>
+    <div class="stats">
+      <div class="reveal d1"><div class="n serif">100+</div><div class="l">Vetted experts</div></div>
+      <div class="reveal d1"><div class="n serif">18</div><div class="l">Years of impact</div></div>
+      <div class="reveal d2"><div class="n serif">12+</div><div class="l">Cities + virtual</div></div>
+      <div class="reveal d2"><div class="n serif">25+</div><div class="l">Yrs top tenure</div></div>
+    </div>
+    <div class="affil reveal d2">
+      <div class="k">Our experts have led work at</div>
+      <div class="row">
+        <span>NASA JPL</span><span>U.S. Air Force</span><span>Virgin Galactic</span><span>Terran Orbital</span><span>Olympic Programs</span><span>Fortune 500</span>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ============ 3D GEM BAND ============ -->
-  <section class="relative bg-pine-deep text-cream overflow-hidden">
-    <div class="absolute inset-0 grain opacity-50"></div>
-    <div class="relative max-w-8xl mx-auto px-5 sm:px-8 py-24 sm:py-32 grid lg:grid-cols-2 gap-10 items-center">
-      <div class="reveal">
-        <span class="text-clay-soft font-semibold text-sm tracking-[0.15em] uppercase">03 — The match</span>
-        <h2 class="mt-4 font-display font-light text-4xl sm:text-6xl tracking-tight leading-[1.03]">Expertise, faceted to fit your exact need.</h2>
-        <p class="mt-6 text-lg text-cream/70 max-w-lg">One deep bench, many specialisms. We turn it until the right face meets your problem, then put that expert to work. No generalists, no scripts.</p>
-        <a href="#experts" data-mag class="mt-8 inline-flex items-center gap-2 rounded-full border border-cream/30 px-7 py-3.5 text-[15px] font-semibold hover:bg-cream hover:text-pine-deep transition">Meet the experts <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-      </div>
-      <div class="relative h-[360px] sm:h-[440px]">
-        <div id="gem" class="absolute inset-0"></div>
+<!-- FOUNDER -->
+<section class="pad" id="story">
+  <div class="container founder">
+    <div class="card reveal">
+      <img class="portrait" src="https://images.squarespace-cdn.com/content/v1/54e2bf5ce4b08791c737b822/13eab03b-3a7a-4ab5-82e1-306999f0b551/Clark+-+Head+Shot+-+Music+Academy+of+the+West+-+Speaking+-+Small.jpg?format=800w" alt="Clark Souers, Founder and CEO of Expert Effect" loading="lazy" />
+      <h3>Clark Souers</h3>
+      <div class="role">Founder &amp; CEO</div>
+      <p>Twenty years of HR leadership across entertainment, hospitality, and nonprofit, with a reputation as a visionary for helping people and organizations thrive in a complex world.</p>
+    </div>
+    <div>
+      <div class="index-tag reveal">(06) — Our story</div>
+      <h2 class="serif reveal d1">Founded in 2008 on one belief: people come first.</h2>
+      <p class="body reveal d1">Clark built Expert Effect to be an integral partner, not an outside vendor. To help small businesses thrive, meet the HR needs of large companies with precision, and lessen the stress load of individuals in the most visible, high-pressure positions.</p>
+      <p class="body reveal d2">The result: business owners who cannot imagine their workplace without us, and high performers living happier, healthier lives while reaching levels they never expected.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="pad contact" id="contact">
+  <div class="container wrap">
+    <div>
+      <div class="index-tag reveal">(07) — Contact</div>
+      <h2 class="serif reveal d1" style="margin-top:16px">Let's solve it together.</h2>
+      <p class="lead reveal d1" style="margin-top:22px;max-width:38ch">Tell us what you are facing. We will match you with the right expert and map out a plan, no cookie-cutter proposals.</p>
+      <div class="detail reveal d2">
+        <a href="tel:8889543373"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3.1-8.7A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg></span>(888) 954-3373</a>
+        <a href="mailto:info@ExpertEffect.com"><span class="ic"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-10 6L2 7"/></svg></span>info@ExpertEffect.com</a>
       </div>
     </div>
-  </section>
+    <form onsubmit="return submitForm(event)" class="reveal d1">
+      <div class="field row2">
+        <div><label>Name</label><input required /></div>
+        <div><label>Company</label><input /></div>
+      </div>
+      <div class="field row2">
+        <div><label>Email</label><input type="email" required /></div>
+        <div><label>Phone</label><input /></div>
+      </div>
+      <div class="field"><label>What do you need help with?</label>
+        <select><option>HR Solutions</option><option>Interim Support</option><option>Organizational Effectiveness</option><option>Stress-Resiliency</option><option>Training &amp; Development</option><option>Something else</option></select>
+      </div>
+      <div class="field"><label>Tell us more</label><textarea rows="3"></textarea></div>
+      <button>Send message</button>
+      <p class="form-ok" id="formOk">Thank you. An expert will be in touch shortly.</p>
+    </form>
+  </div>
+</section>
 
-  <!-- ============ HR SPLIT ============ -->
-  <section id="hr" class="bg-cream text-ink py-28 sm:py-36">
-    <div class="max-w-8xl mx-auto px-5 sm:px-8">
-      <div class="grid lg:grid-cols-2 gap-14 lg:gap-20 items-center">
-        <div class="reveal relative rounded-3xl overflow-hidden aspect-[4/3] group">
-          <img src="https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=80" alt="HR team at work" class="card-img w-full h-full object-cover" />
-          <div class="absolute bottom-5 left-5 right-5 rounded-2xl bg-cream/90 backdrop-blur p-5 shadow-xl">
-            <p class="font-display text-lg text-pine">"Want top-notch HR support at a reasonable monthly fee?"</p>
-            <p class="mt-1 text-[14px] text-ink/60">That's the whole idea.</p>
-          </div>
-        </div>
-        <div class="reveal reveal-d1">
-          <span class="text-clay font-semibold text-sm tracking-[0.15em] uppercase">HR Solutions</span>
-          <h2 class="mt-4 font-display font-light text-4xl sm:text-5xl tracking-tight text-pine leading-[1.04]">Avoid the costly people mistakes before they happen.</h2>
-          <p class="mt-5 text-lg text-ink/65">Top-notch HR for small businesses, and hand-off expertise for the projects large teams don't have bandwidth to run.</p>
-          <div class="mt-8 grid sm:grid-cols-2 gap-8">
-            <div>
-              <p class="flex items-center gap-2 font-semibold text-pine"><i data-lucide="sprout" class="w-4 h-4 text-clay"></i>Small Business</p>
-              <ul class="mt-3 space-y-2 text-[14px] text-ink/70">
-                <li>Compliance & handbooks</li><li>Onboarding & records</li><li>Talent acquisition</li><li>Performance management</li><li>Benefits & leaves</li>
-              </ul>
-            </div>
-            <div>
-              <p class="flex items-center gap-2 font-semibold text-pine"><i data-lucide="building-2" class="w-4 h-4 text-clay"></i>Mid to Large</p>
-              <ul class="mt-3 space-y-2 text-[14px] text-ink/70">
-                <li>HR compliance audits</li><li>Compensation & equity</li><li>Change management</li><li>Investigations</li><li>HRIS implementation</li>
-              </ul>
-            </div>
-          </div>
-          <div class="mt-9 flex flex-wrap items-center gap-4">
-            <a href="#contact" data-mag class="inline-flex items-center gap-2 rounded-full bg-pine text-cream px-7 py-3.5 text-[15px] font-semibold hover:bg-clay transition">Get HR support <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-            <a href="#contact" class="text-[15px] font-semibold text-clay link-underline">Request a training workshop</a>
-          </div>
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="top">
+      <div>
+        <a href="#top" class="brand"><span class="name serif">Expert Effect<sup>®</sup></span><span class="tag" style="color:rgba(251,249,243,.55)">Expert-Driven Solutions</span></a>
+        <p class="desc">Expert-driven human resources, organizational effectiveness, and stress-resiliency. Virtual support available throughout the United States.</p>
+        <div class="social">
+          <a href="https://instagram.com/ExpertEffect" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://linkedin.com/company/10539470" aria-label="LinkedIn"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 8a6 6 0 0 1 6 6v6h-4v-6a2 2 0 0 0-4 0v6h-4v-10h4v1.5A4 4 0 0 1 16 8z"/><rect x="2" y="9" width="4" height="11"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://youtube.com/@experteffect" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M22 12s0-3.5-.4-5a2.5 2.5 0 0 0-1.8-1.8C18.3 5 12 5 12 5s-6.3 0-7.8.4A2.5 2.5 0 0 0 2.4 7C2 8.5 2 12 2 12s0 3.5.4 5a2.5 2.5 0 0 0 1.8 1.8C5.7 19 12 19 12 19s6.3 0 7.8-.4A2.5 2.5 0 0 0 21.6 17c.4-1.5.4-5 .4-5z"/><path d="m10 15 5-3-5-3z" fill="currentColor" stroke="none"/></svg></a>
         </div>
       </div>
+      <div class="col"><h4>Solutions</h4><a href="#hr">HR Solutions</a><a href="#solutions">Interim Support</a><a href="#solutions">Org Effectiveness</a><a href="#resiliency">Stress-Resiliency</a></div>
+      <div class="col"><h4>Company</h4><a href="#story">Our Story</a><a href="#experts">Meet the Experts</a><a href="#contact">Careers</a><a href="#contact">Contact</a></div>
     </div>
-  </section>
+    <div class="base"><span>© 2026 Expert Effect®. All rights reserved.</span><span>Careers with Expert Effect &amp; our clients</span></div>
+  </div>
+  <div class="wordmark" aria-hidden="true">Expert Effect</div>
+</footer>
 
-  <!-- ============ RESILIENCY ============ -->
-  <section id="resiliency" class="relative bg-pine text-cream py-28 sm:py-36 overflow-hidden">
-    <div class="absolute -bottom-40 -right-40 w-[540px] h-[540px] rounded-full bg-moss/25 blur-3xl"></div>
-    <div class="relative max-w-8xl mx-auto px-5 sm:px-8">
-      <div class="grid lg:grid-cols-12 gap-12 items-start">
-        <div class="reveal lg:col-span-5 lg:sticky lg:top-28">
-          <span class="text-clay-soft font-semibold text-sm tracking-[0.15em] uppercase">04 — Stress-Resiliency</span>
-          <h2 class="mt-4 font-display font-light text-4xl sm:text-6xl tracking-tight leading-[1.02]">For the people the pressure never lets up on.</h2>
-          <p class="mt-6 text-lg text-cream/70">Athletes, executives, celebrities, and students in visible positions where high performance is a must. We lessen the load so you live happier, healthier, and perform higher than you thought possible.</p>
-          <div class="mt-8 rounded-3xl overflow-hidden aspect-[16/10] group">
-            <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?auto=format&fit=crop&w=1200&q=80" alt="Resiliency and wellbeing" class="card-img w-full h-full object-cover" />
-          </div>
-        </div>
-        <div class="lg:col-span-7 grid sm:grid-cols-2 gap-5">
-          <div class="reveal rounded-3xl bg-cream/[0.06] border border-cream/10 p-8 backdrop-blur"><span class="grid place-items-center w-12 h-12 rounded-2xl bg-clay-soft/15 text-clay-soft"><i data-lucide="dumbbell" class="w-6 h-6"></i></span><h3 class="mt-5 font-display text-2xl">Body Resiliency</h3><p class="mt-2 text-[15px] text-cream/70 leading-relaxed">Strength & conditioning, nervous-system regulation, clinical nutrition, and embodied leadership from licensed practitioners.</p></div>
-          <div class="reveal reveal-d1 rounded-3xl bg-cream/[0.06] border border-cream/10 p-8 backdrop-blur"><span class="grid place-items-center w-12 h-12 rounded-2xl bg-clay-soft/15 text-clay-soft"><i data-lucide="brain" class="w-6 h-6"></i></span><h3 class="mt-5 font-display text-2xl">Mind Resiliency</h3><p class="mt-2 text-[15px] text-cream/70 leading-relaxed">Neuropsychology, mental-performance consulting, and behavioral change, including Olympic-level experience.</p></div>
-          <div class="reveal rounded-3xl bg-cream/[0.06] border border-cream/10 p-8 backdrop-blur"><span class="grid place-items-center w-12 h-12 rounded-2xl bg-clay-soft/15 text-clay-soft"><i data-lucide="gauge" class="w-6 h-6"></i></span><h3 class="mt-5 font-display text-2xl">Performance Readiness</h3><p class="mt-2 text-[15px] text-cream/70 leading-relaxed">Prepare for high-stress workdays, escape the busyness trap, and build emotional agility you can call on under fire.</p></div>
-          <div class="reveal reveal-d1 rounded-3xl bg-cream/[0.06] border border-cream/10 p-8 backdrop-blur"><span class="grid place-items-center w-12 h-12 rounded-2xl bg-clay-soft/15 text-clay-soft"><i data-lucide="shield-check" class="w-6 h-6"></i></span><h3 class="mt-5 font-display text-2xl">Burnout Prevention</h3><p class="mt-2 text-[15px] text-cream/70 leading-relaxed">Cultivate resiliency before the crash, for leaders and teams carrying relentless expectations.</p></div>
-          <div class="reveal sm:col-span-2 rounded-3xl bg-clay p-8 flex flex-col sm:flex-row sm:items-center justify-between gap-5">
-            <p class="font-display text-2xl max-w-md">"You achieve. You're rewarded. Expectations are raised. Performance must not falter."</p>
-            <a href="#contact" data-mag class="shrink-0 inline-flex items-center gap-2 rounded-full bg-cream text-pine px-6 py-3.5 text-[15px] font-semibold hover:bg-pine hover:text-cream transition">Start your plan <i data-lucide="arrow-right" class="w-4 h-4"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+<script>
+  // scroll-aware header (dark over hero, solid after)
+  const header = document.getElementById('header');
+  const hero = document.getElementById('top');
+  function onScroll(){
+    const past = window.scrollY > (hero.offsetHeight - 90);
+    header.classList.toggle('scrolled', past);
+    header.classList.toggle('on-dark', !past);
+  }
+  onScroll(); addEventListener('scroll', onScroll, {passive:true});
 
-  <!-- ============ IMPACT STAT BAND (immersive) ============ -->
-  <section class="relative py-28 sm:py-36 overflow-hidden">
-    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=2000&q=80" alt="" class="absolute inset-0 w-full h-full object-cover" />
-    <div class="absolute inset-0 bg-pine-deep/85"></div>
-    <div class="relative max-w-8xl mx-auto px-5 sm:px-8 text-cream text-center">
-      <h2 class="reveal font-display font-light text-3xl sm:text-5xl tracking-tight max-w-3xl mx-auto leading-[1.1]">Happier, healthier people. Workplaces that couldn't imagine going back.</h2>
-      <div class="reveal reveal-d1 mt-14 grid grid-cols-2 lg:grid-cols-4 gap-8">
-        <div><div class="font-display text-5xl sm:text-6xl text-clay-soft" data-count="100" data-suffix="+">0</div><div class="mt-2 text-[13px] uppercase tracking-wider text-cream/60">Vetted experts</div></div>
-        <div><div class="font-display text-5xl sm:text-6xl text-clay-soft" data-count="18" data-suffix="">0</div><div class="mt-2 text-[13px] uppercase tracking-wider text-cream/60">Years of impact</div></div>
-        <div><div class="font-display text-5xl sm:text-6xl text-clay-soft" data-count="12" data-suffix="+">0</div><div class="mt-2 text-[13px] uppercase tracking-wider text-cream/60">Cities served</div></div>
-        <div><div class="font-display text-5xl sm:text-6xl text-clay-soft" data-count="25" data-suffix="+">0</div><div class="mt-2 text-[13px] uppercase tracking-wider text-cream/60">Yrs top expertise</div></div>
-      </div>
-    </div>
-  </section>
+  // reveal on scroll
+  const io = new IntersectionObserver((es)=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }), {threshold:0.16, rootMargin:'0px 0px -8% 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 
-  <!-- ============ EXPERTS ============ -->
-  <section id="experts" class="bg-cream text-ink py-28 sm:py-36">
-    <div class="max-w-8xl mx-auto px-5 sm:px-8">
-      <div class="reveal max-w-2xl">
-        <span class="text-clay font-semibold text-sm tracking-[0.15em] uppercase">05 — Our experts</span>
-        <h2 class="mt-4 font-display font-light text-4xl sm:text-6xl tracking-tight text-pine leading-[1.02]">A bench this deep, matched to your exact need.</h2>
-        <p class="mt-6 text-lg text-ink/65">A highly vetted group of seasoned professionals across HR, resiliency, and organizational effectiveness. You get the right specialist, every time.</p>
-      </div>
-      <div class="reveal mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-        <div class="rounded-3xl bg-white border border-pine/8 p-8 shadow-sm"><div class="font-display text-5xl text-clay">18+</div><h3 class="mt-3 font-semibold text-pine">HR Experts</h3><p class="mt-1.5 text-[14px] text-ink/55 leading-relaxed">Employee relations, recruiting, compliance, benefits, and comp, 12 to 25+ years each.</p></div>
-        <div class="rounded-3xl bg-white border border-pine/8 p-8 shadow-sm"><div class="font-display text-5xl text-clay">Body</div><h3 class="mt-3 font-semibold text-pine">Resiliency Experts</h3><p class="mt-1.5 text-[14px] text-ink/55 leading-relaxed">Strength coaches, dietitians, and licensed practitioners for physical readiness.</p></div>
-        <div class="rounded-3xl bg-white border border-pine/8 p-8 shadow-sm"><div class="font-display text-5xl text-clay">Mind</div><h3 class="mt-3 font-semibold text-pine">Resiliency Experts</h3><p class="mt-1.5 text-[14px] text-ink/55 leading-relaxed">Neuropsychologists and mental-performance consultants, including Olympic-level.</p></div>
-        <div class="rounded-3xl bg-white border border-pine/8 p-8 shadow-sm"><div class="font-display text-5xl text-clay">Org</div><h3 class="mt-3 font-semibold text-pine">Effectiveness Experts</h3><p class="mt-1.5 text-[14px] text-ink/55 leading-relaxed">AI, change management, DEI, leadership, and storytelling, from JPL to the Air Force.</p></div>
-      </div>
-      <div class="reveal mt-8 rounded-3xl border border-pine/10 bg-paper/60 p-6 sm:p-8">
-        <p class="text-sm font-semibold text-pine mb-4">Specialist coverage includes</p>
-        <div class="flex flex-wrap gap-2.5">
-          <span class="chip">AI & Automation</span><span class="chip">Change Management</span><span class="chip">Compensation & Equity</span><span class="chip">Conflict Resolution</span><span class="chip">Employee Investigations</span><span class="chip">Leadership Coaching</span><span class="chip">Equity & Inclusion</span><span class="chip">LEGO Serious Play</span><span class="chip">HRIS Implementation</span><span class="chip">Organizational Design</span><span class="chip">Payroll</span><span class="chip">Career Transition</span><span class="chip">Public Speaking</span><span class="chip">Emotional Agility</span><span class="chip">Culture Transformation</span>
-        </div>
-      </div>
-    </div>
-  </section>
+  // mobile menu
+  const menuBtn = document.getElementById('menuBtn');
+  const mobileNav = document.getElementById('mobileNav');
+  const menuClose = document.getElementById('menuClose');
+  const openMenu = ()=>{ mobileNav.classList.add('open'); document.body.style.overflow='hidden'; };
+  const closeMenu = ()=>{ mobileNav.classList.remove('open'); document.body.style.overflow=''; };
+  menuBtn.addEventListener('click', openMenu);
+  menuClose.addEventListener('click', closeMenu);
+  mobileNav.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeMenu));
 
-  <!-- ============ FOUNDER ============ -->
-  <section id="founder" class="bg-pine-deep text-cream py-28 sm:py-36 relative overflow-hidden grain">
-    <div class="relative max-w-8xl mx-auto px-5 sm:px-8 grid lg:grid-cols-12 gap-12 items-center">
-      <div class="reveal lg:col-span-5">
-        <div class="rounded-3xl bg-gradient-to-br from-moss to-pine p-1 shadow-2xl float">
-          <div class="rounded-[22px] bg-pine-deep p-8">
-            <div class="grid place-items-center w-20 h-20 rounded-2xl bg-clay text-cream font-display text-4xl">CS</div>
-            <h3 class="mt-6 font-display text-3xl">Clark Souers</h3>
-            <p class="text-clay-soft font-medium">Founder & CEO</p>
-            <p class="mt-4 text-cream/70 leading-relaxed text-[15px]">Twenty years of HR leadership across entertainment, hospitality, and nonprofit, with a reputation as a visionary for helping people and organizations thrive in a complex world.</p>
-            <div class="mt-6 flex flex-wrap gap-2"><span class="chip-dark">Emotional Agility</span><span class="chip-dark">Stress-Resiliency</span><span class="chip-dark">Leadership</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="reveal reveal-d1 lg:col-span-7">
-        <span class="text-clay-soft font-semibold text-sm tracking-[0.15em] uppercase">06 — Our story</span>
-        <h2 class="mt-4 font-display font-light text-4xl sm:text-6xl tracking-tight leading-[1.02]">Founded in 2008 on one belief: people come first.</h2>
-        <p class="mt-6 text-lg text-cream/75 leading-relaxed">Clark built Expert Effect to be an integral partner, not an outside vendor. To help small businesses thrive, meet the HR needs of large companies with precision, and lessen the stress load of individuals in the most visible, high-pressure positions.</p>
-        <p class="mt-5 text-lg text-cream/75 leading-relaxed">The result: business owners who can't imagine their workplace without us, and high performers living happier, healthier lives while reaching levels they never expected.</p>
-        <div class="mt-8 grid sm:grid-cols-2 gap-4">
-          <div class="rounded-2xl bg-cream/[0.06] border border-cream/10 p-5"><p class="text-[13px] uppercase tracking-wide text-clay-soft font-semibold">Speaking topics</p><p class="mt-2 text-[15px] text-cream/80">Escaping the Busyness Trap · From Reactive to Exceptional · Preventing Burnout</p></div>
-          <div class="rounded-2xl bg-cream/[0.06] border border-cream/10 p-5"><p class="text-[13px] uppercase tracking-wide text-clay-soft font-semibold">Approach</p><p class="mt-2 text-[15px] text-cream/80">Experiential learning, relational care, and real-world impact on every engagement.</p></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ LOCATIONS ============ -->
-  <section class="bg-cream text-ink py-28 sm:py-36">
-    <div class="max-w-8xl mx-auto px-5 sm:px-8 grid lg:grid-cols-2 gap-12 items-center">
-      <div class="reveal">
-        <span class="text-clay font-semibold text-sm tracking-[0.15em] uppercase">07 — Where we work</span>
-        <h2 class="mt-4 font-display font-light text-4xl sm:text-6xl tracking-tight text-pine leading-[1.02]">In 8 cities. Virtual everywhere else.</h2>
-        <p class="mt-6 text-lg text-ink/65">In-person support across the West and beyond, plus fully virtual support throughout the United States. Rooted in Los Angeles and Southern California, expanding nationally.</p>
-        <div class="mt-7"><p class="text-sm font-semibold text-pine mb-2">Coming 2026–2028</p><div class="flex flex-wrap gap-2"><span class="chip">Dallas</span><span class="chip">New York</span><span class="chip">Houston</span><span class="chip">Seattle</span></div></div>
-      </div>
-      <div class="reveal reveal-d1 grid grid-cols-2 sm:grid-cols-4 gap-3">
-        <div class="loc">Los Angeles</div><div class="loc">San Diego</div><div class="loc">San Francisco</div><div class="loc">Fresno</div><div class="loc">Las Vegas</div><div class="loc">Phoenix</div><div class="loc">Denver</div><div class="loc">Miami</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CONTACT ============ -->
-  <section id="contact" class="bg-paper text-ink py-24 sm:py-32">
-    <div class="max-w-8xl mx-auto px-5 sm:px-8">
-      <div class="reveal rounded-[36px] bg-pine text-cream p-8 sm:p-14 relative overflow-hidden shadow-2xl shadow-pine/20 grain">
-        <div class="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-clay/30 blur-3xl"></div>
-        <div class="relative grid lg:grid-cols-2 gap-12">
-          <div>
-            <h2 class="font-display font-light text-4xl sm:text-6xl tracking-tight leading-[1.02]">Let's solve it together.</h2>
-            <p class="mt-6 text-lg text-cream/75 max-w-md">Tell us what you're facing. We'll match you with the right expert and map out a plan, no cookie-cutter proposals.</p>
-            <div class="mt-8 space-y-4">
-              <a href="tel:8889543373" data-mag class="flex items-center gap-3 group"><span class="grid place-items-center w-11 h-11 rounded-xl bg-cream/10 group-hover:bg-clay transition"><i data-lucide="phone" class="w-5 h-5"></i></span><span><span class="block text-[13px] text-cream/50">Call us</span><span class="font-medium">(888) 954-3373</span></span></a>
-              <a href="mailto:info@ExpertEffect.com" data-mag class="flex items-center gap-3 group"><span class="grid place-items-center w-11 h-11 rounded-xl bg-cream/10 group-hover:bg-clay transition"><i data-lucide="mail" class="w-5 h-5"></i></span><span><span class="block text-[13px] text-cream/50">Email us</span><span class="font-medium">info@ExpertEffect.com</span></span></a>
-            </div>
-            <div class="mt-8 rounded-2xl bg-cream/[0.06] border border-cream/10 p-5">
-              <p class="font-display text-xl">Unlock VIP insights</p><p class="mt-1 text-[14px] text-cream/70">Quarterly expert tips, straight to your inbox.</p>
-              <form class="mt-4 flex flex-col sm:flex-row gap-2.5" onsubmit="return subscribe(event)">
-                <input type="email" required placeholder="you@company.com" class="flex-1 rounded-full bg-cream text-ink px-5 py-3 text-[15px] outline-none focus:ring-2 focus:ring-clay" />
-                <button class="rounded-full bg-clay px-6 py-3 text-[15px] font-semibold hover:bg-clay-soft transition">Subscribe</button>
-              </form>
-              <p id="subMsg" class="mt-2 text-[13px] text-clay-soft hidden">Thanks — you're on the list.</p>
-            </div>
-          </div>
-          <form class="rounded-3xl bg-cream text-ink p-7 sm:p-8" onsubmit="return sendForm(event)">
-            <div class="grid sm:grid-cols-2 gap-4">
-              <div><label class="text-[13px] font-semibold text-pine">Name</label><input required class="mt-1.5 w-full rounded-xl border border-pine/15 bg-white px-4 py-3 text-[15px] outline-none focus:ring-2 focus:ring-clay" /></div>
-              <div><label class="text-[13px] font-semibold text-pine">Company</label><input class="mt-1.5 w-full rounded-xl border border-pine/15 bg-white px-4 py-3 text-[15px] outline-none focus:ring-2 focus:ring-clay" /></div>
-            </div>
-            <div class="mt-4 grid sm:grid-cols-2 gap-4">
-              <div><label class="text-[13px] font-semibold text-pine">Email</label><input type="email" required class="mt-1.5 w-full rounded-xl border border-pine/15 bg-white px-4 py-3 text-[15px] outline-none focus:ring-2 focus:ring-clay" /></div>
-              <div><label class="text-[13px] font-semibold text-pine">Phone</label><input class="mt-1.5 w-full rounded-xl border border-pine/15 bg-white px-4 py-3 text-[15px] outline-none focus:ring-2 focus:ring-clay" /></div>
-            </div>
-            <div class="mt-4"><label class="text-[13px] font-semibold text-pine">What do you need help with?</label>
-              <select class="mt-1.5 w-full rounded-xl border border-pine/15 bg-white px-4 py-3 text-[15px] outline-none focus:ring-2 focus:ring-clay"><option>HR Solutions</option><option>Interim Support</option><option>Organizational Effectiveness</option><option>Stress-Resiliency</option><option>Training & Development</option><option>Something else</option></select>
-            </div>
-            <div class="mt-4"><label class="text-[13px] font-semibold text-pine">Tell us more</label><textarea rows="3" class="mt-1.5 w-full rounded-xl border border-pine/15 bg-white px-4 py-3 text-[15px] outline-none focus:ring-2 focus:ring-clay resize-none"></textarea></div>
-            <button class="mt-5 w-full rounded-full bg-pine text-cream px-6 py-3.5 text-[15px] font-semibold hover:bg-clay transition">Send message</button>
-            <p id="formMsg" class="mt-3 text-center text-[14px] text-moss font-medium hidden">Thanks — an expert will be in touch shortly.</p>
-          </form>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ FOOTER ============ -->
-  <footer class="bg-pine-deep text-cream/80 grain">
-    <div class="max-w-8xl mx-auto px-5 sm:px-8 py-16">
-      <div class="grid md:grid-cols-4 gap-10">
-        <div class="md:col-span-2">
-          <a href="#top" class="flex items-center gap-2.5"><span class="grid place-items-center w-9 h-9 rounded-lg bg-cream text-pine font-display text-lg">E</span><span class="font-display text-xl text-cream">Expert Effect<span class="text-clay-soft align-super text-[10px]">®</span></span></a>
-          <p class="mt-4 max-w-sm text-[15px] leading-relaxed">Expert-driven human resources, organizational effectiveness, and stress-resiliency. Virtual support available throughout the United States.</p>
-          <div class="mt-5 flex gap-3">
-            <a href="https://instagram.com/ExpertEffect" aria-label="Instagram" class="grid place-items-center w-10 h-10 rounded-full bg-cream/10 hover:bg-clay transition"><i data-lucide="instagram" class="w-5 h-5"></i></a>
-            <a href="https://linkedin.com/company/10539470" aria-label="LinkedIn" class="grid place-items-center w-10 h-10 rounded-full bg-cream/10 hover:bg-clay transition"><i data-lucide="linkedin" class="w-5 h-5"></i></a>
-            <a href="https://youtube.com/@experteffect" aria-label="YouTube" class="grid place-items-center w-10 h-10 rounded-full bg-cream/10 hover:bg-clay transition"><i data-lucide="youtube" class="w-5 h-5"></i></a>
-          </div>
-        </div>
-        <div><p class="font-semibold text-cream mb-3">Solutions</p><ul class="space-y-2 text-[15px]"><li><a href="#hr" class="link-underline">HR Solutions</a></li><li><a href="#hr" class="link-underline">Interim Support</a></li><li><a href="#experts" class="link-underline">Org Effectiveness</a></li><li><a href="#resiliency" class="link-underline">Stress-Resiliency</a></li></ul></div>
-        <div><p class="font-semibold text-cream mb-3">Company</p><ul class="space-y-2 text-[15px]"><li><a href="#founder" class="link-underline">Our Story</a></li><li><a href="#experts" class="link-underline">Meet the Experts</a></li><li><a href="#contact" class="link-underline">Careers</a></li><li><a href="#contact" class="link-underline">Contact</a></li></ul></div>
-      </div>
-      <div class="mt-12 pt-6 border-t border-cream/10 flex flex-col sm:flex-row justify-between gap-3 text-[13px] text-cream/50"><p>© 2026 Expert Effect®. All rights reserved.</p><p>Career opportunities with Expert Effect & our clients.</p></div>
-    </div>
-  </footer>
-
-  <style type="text/tailwindcss">
-    .chip { @apply inline-flex items-center rounded-full border border-pine/15 bg-cream px-3.5 py-1.5 text-[13px] font-medium text-pine; }
-    .chip-dark { @apply inline-flex items-center rounded-full border border-cream/15 bg-cream/[0.06] px-3 py-1 text-[12px] font-medium text-cream/80; }
-    .loc { @apply grid place-items-center rounded-2xl bg-white border border-pine/8 py-7 text-[15px] font-semibold text-pine shadow-sm hover:border-clay/40 hover:text-clay hover:-translate-y-1 transition; }
-  </style>
-
-  <!-- ============ 3D GEM ============ -->
-  <script type="module">
-    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const mount = document.getElementById('gem');
-    if (mount) {
-      try {
-        const THREE = await import('three');
-        const w = () => mount.clientWidth, h = () => mount.clientHeight;
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(40, w()/h(), 0.1, 100);
-        camera.position.z = 7;
-        const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-        renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-        renderer.setSize(w(), h());
-        mount.appendChild(renderer.domElement);
-
-        const gem = new THREE.Mesh(
-          new THREE.IcosahedronGeometry(2.1, 0),
-          new THREE.MeshStandardMaterial({ color: 0xC0632E, metalness: 0.35, roughness: 0.32, flatShading: true })
-        );
-        scene.add(gem);
-        const wire = new THREE.LineSegments(
-          new THREE.WireframeGeometry(new THREE.IcosahedronGeometry(2.12, 0)),
-          new THREE.LineBasicMaterial({ color: 0xFBF7EF, transparent: true, opacity: 0.18 })
-        );
-        gem.add(wire);
-
-        scene.add(new THREE.AmbientLight(0xffffff, 0.55));
-        const key = new THREE.DirectionalLight(0xffe6c9, 1.6); key.position.set(4, 5, 6); scene.add(key);
-        const rim = new THREE.PointLight(0x356354, 3, 30); rim.position.set(-5, -3, 2); scene.add(rim);
-        const fill = new THREE.PointLight(0xE0985F, 2, 30); fill.position.set(3, -4, 4); scene.add(fill);
-
-        const target = { x: 0, y: 0 }, cur = { x: 0, y: 0 };
-        window.addEventListener('pointermove', (e) => {
-          const r = mount.getBoundingClientRect();
-          target.x = ((e.clientY - (r.top + r.height/2)) / window.innerHeight) * 1.2;
-          target.y = ((e.clientX - (r.left + r.width/2)) / window.innerWidth) * 1.6;
-        });
-        window.addEventListener('resize', () => { camera.aspect = w()/h(); camera.updateProjectionMatrix(); renderer.setSize(w(), h()); });
-
-        const loop = () => {
-          cur.x += (target.x - cur.x) * 0.05; cur.y += (target.y - cur.y) * 0.05;
-          gem.rotation.y += 0.004; gem.rotation.x = cur.x * 0.6; gem.rotation.z += 0.0012;
-          gem.position.x = cur.y * 0.4;
-          renderer.render(scene, camera);
-          if (!reduced) requestAnimationFrame(loop);
-        };
-        loop(); if (reduced) renderer.render(scene, camera);
-      } catch (e) {
-        mount.style.background = 'radial-gradient(circle at 50% 45%, rgba(192,99,46,.35), transparent 62%)';
-      }
-    }
-  </script>
-
-  <!-- ============ UI ============ -->
-  <script>
-    lucide.createIcons();
-
-    const prog = document.getElementById('prog');
-    const nav = document.getElementById('nav'), brand = document.getElementById('brand'), navlinks = document.getElementById('navlinks'), navphone = document.getElementById('navphone'), hero = document.getElementById('top');
-    const setNav = () => {
-      const y = window.scrollY, max = document.documentElement.scrollHeight - window.innerHeight;
-      prog.style.width = (y / max * 100) + '%';
-      const overHero = y < hero.offsetHeight - 88;
-      if (y > 16) nav.classList.add('backdrop-blur-md'); else nav.classList.remove('backdrop-blur-md');
-      if (overHero) {
-        nav.classList.remove('bg-cream/90','shadow-sm','border-b','border-pine/8');
-        brand.classList.replace('text-pine','text-cream'); navlinks.classList.replace('text-ink/70','text-cream/75'); navphone.classList.replace('text-pine','text-cream/80');
-      } else {
-        nav.classList.add('bg-cream/90','shadow-sm','border-b','border-pine/8');
-        if (brand.classList.contains('text-cream')) brand.classList.replace('text-cream','text-pine');
-        if (navlinks.classList.contains('text-cream/75')) navlinks.classList.replace('text-cream/75','text-ink/70');
-        if (navphone.classList.contains('text-cream/80')) navphone.classList.replace('text-cream/80','text-pine');
-      }
-    };
-    setNav(); window.addEventListener('scroll', setNav, { passive: true });
-
-    const menuBtn = document.getElementById('menuBtn'), mobileMenu = document.getElementById('mobileMenu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
-    mobileMenu.querySelectorAll('a').forEach(a => a.addEventListener('click', () => mobileMenu.classList.add('hidden')));
-
-    const io = new IntersectionObserver((es) => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } }), { threshold: 0.12 });
-    document.querySelectorAll('.reveal').forEach(el => io.observe(el));
-
-    const cio = new IntersectionObserver((es) => es.forEach(e => {
-      if (!e.isIntersecting) return; cio.unobserve(e.target);
-      const el = e.target, end = +el.dataset.count, suf = el.dataset.suffix || '';
-      let n = 0; const step = Math.max(1, Math.round(end/45));
-      const tick = () => { n = Math.min(end, n + step); el.textContent = n + suf; if (n < end) requestAnimationFrame(tick); };
-      tick();
-    }), { threshold: 0.6 });
-    document.querySelectorAll('[data-count]').forEach(el => cio.observe(el));
-
-    if (window.matchMedia('(pointer: fine)').matches) {
-      document.body.classList.add('has-cursor');
-      const cur = document.getElementById('cur'), dot = document.getElementById('curDot');
-      let cx = innerWidth/2, cy = innerHeight/2, tx = cx, ty = cy;
-      window.addEventListener('pointermove', (e) => { tx = e.clientX; ty = e.clientY; dot.style.transform = `translate(${tx-3}px,${ty-3}px)`; });
-      const ring = () => { cx += (tx-cx)*0.2; cy += (ty-cy)*0.2; cur.style.transform = `translate(${cx-20}px,${cy-20}px)`; requestAnimationFrame(ring); };
-      ring();
-      document.querySelectorAll('a, button, [data-mag], input, select, textarea').forEach(el => {
-        el.addEventListener('pointerenter', () => document.body.classList.add('cur-lg'));
-        el.addEventListener('pointerleave', () => document.body.classList.remove('cur-lg'));
-      });
-      document.querySelectorAll('[data-mag]').forEach(el => {
-        el.addEventListener('pointermove', (e) => { const r = el.getBoundingClientRect(); el.style.transform = `translate(${(e.clientX-(r.left+r.width/2))*0.16}px, ${(e.clientY-(r.top+r.height/2))*0.2}px)`; });
-        el.addEventListener('pointerleave', () => el.style.transform = '');
-      });
-    }
-
-    // Forms (demo, no backend yet)
-    function sendForm(e){ e.preventDefault(); document.getElementById('formMsg').classList.remove('hidden'); e.target.reset(); return false; }
-    function subscribe(e){ e.preventDefault(); document.getElementById('subMsg').classList.remove('hidden'); e.target.reset(); return false; }
-  </script>
+  // form
+  function submitForm(e){ e.preventDefault(); document.getElementById('formOk').style.display='block'; e.target.reset(); return false; }
+</script>
 </body>
 </html>
