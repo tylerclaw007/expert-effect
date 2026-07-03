@@ -49,14 +49,17 @@
   .btn-ghost:hover{border-color:var(--ink)}
 
   /* header (solid on this page) */
-  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,242,234,.9);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line)}
+  header{position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(245,242,234,.9);backdrop-filter:blur(14px);box-shadow:0 1px 0 var(--line);will-change:transform;transition:transform .55s var(--ease)}
+  header.nav-hidden{transform:translateY(-100%)}
   header .bar{max-width:var(--container);margin:0 auto;padding:16px 40px;display:flex;align-items:center;justify-content:space-between}
   .brand{display:flex;flex-direction:column;line-height:1}
   .brand .name{font-family:'Playfair Display',serif;font-size:23px;font-weight:500;letter-spacing:.01em;color:var(--ink)}
   .brand .name sup{font-size:9px;vertical-align:super;opacity:.6}
   .brand .tag{font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--stone);margin-top:5px}
   nav.links{display:flex;align-items:center;gap:38px}
-  nav.links a{font-size:13px;letter-spacing:.04em;color:var(--ink-soft);transition:color .4s}
+  nav.links a{position:relative;font-size:13px;letter-spacing:.04em;color:var(--ink-soft);transition:color .4s}
+  nav.links a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-5px;height:1.5px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .5s var(--ease)}
+  nav.links a:not(.nav-cta):hover::after,nav.links a.active:not(.nav-cta)::after{transform:scaleX(1)}
   nav.links a:hover,nav.links a.active{color:var(--ink)}
   .nav-cta{padding:11px 22px;border:1px solid var(--line);border-radius:100px;font-size:13px;letter-spacing:.03em;transition:all .4s}
   .nav-cta:hover{background:var(--ink);color:var(--paper);border-color:var(--ink)}
@@ -101,7 +104,8 @@
   footer .brand .name{color:var(--paper)}
   footer p.desc{margin-top:18px;max-width:38ch;font-size:15px;line-height:1.6}
   footer .social{margin-top:24px;display:flex;gap:12px}
-  footer .social a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line-light);display:grid;place-items:center;color:var(--paper);transition:all .4s}
+  footer .social a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line-light);display:grid;place-items:center;color:var(--paper);transition:transform .5s var(--ease),background .45s,border-color .45s}
+  footer .social a:hover{transform:translateY(-4px) scale(1.05)}
   footer .social a:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
   footer .col h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,249,243,.5);margin-bottom:18px}
   footer .col a{display:block;padding:7px 0;font-size:15px;color:rgba(251,249,243,.72);transition:color .4s}
@@ -109,6 +113,9 @@
   footer .base{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line-light);padding:26px 0;font-size:12px;letter-spacing:.06em;color:rgba(251,249,243,.45)}
 
   a:focus-visible,button:focus-visible,summary:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+  html.lenis,html.lenis body{height:auto}
+  .lenis.lenis-smooth{scroll-behavior:auto!important}
+  .lenis.lenis-stopped{overflow:hidden}
 
   /* mobile nav */
   #mobileNav{position:fixed;inset:0;z-index:60;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:center;padding:0 32px;opacity:0;visibility:hidden;transform:translateY(-8px);transition:opacity .5s var(--ease),transform .5s var(--ease),visibility .5s}
@@ -144,7 +151,7 @@
 </div>
 
 <!-- HEADER -->
-<header>
+<header id="header">
   <div class="bar">
     <a href="index.html" class="brand">
       <span class="name serif">Expert Effect<sup>®</sup></span>
@@ -272,7 +279,9 @@
   </div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const menuBtn = document.getElementById('menuBtn');
   const mobileNav = document.getElementById('mobileNav');
   const menuClose = document.getElementById('menuClose');
@@ -283,6 +292,33 @@
   // accordion: close others when one opens
   const items = document.querySelectorAll('details.faq-item');
   items.forEach(d=>d.addEventListener('toggle', ()=>{ if(d.open) items.forEach(o=>{ if(o!==d) o.open=false; }); }));
+
+  // smooth nav hide/show on scroll
+  const header = document.getElementById('header');
+  let lastY = 0;
+  function onScroll(){
+    const y = window.scrollY;
+    if (!prefersReduced){
+      if (y > 200 && y > lastY + 4) header.classList.add('nav-hidden');
+      else if (y < lastY - 4 || y < 200) header.classList.remove('nav-hidden');
+    }
+    lastY = y;
+  }
+  addEventListener('scroll', onScroll, {passive:true});
+
+  // Lenis smooth scroll; native anchors routed through Lenis
+  if (!prefersReduced && window.Lenis){
+    const lenis = new Lenis({ duration: 1.05, easing: t=>Math.min(1, 1.001 - Math.pow(2, -10*t)), smoothWheel: true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    lenis.on('scroll', onScroll);
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const h = a.getAttribute('href');
+        if (h.length > 1){ const el = document.querySelector(h); if (el){ e.preventDefault(); lenis.scrollTo(el, {offset:-72, duration:1.1}); } }
+      });
+    });
+  }
 </script>
 </body>
 </html>

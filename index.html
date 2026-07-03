@@ -63,14 +63,14 @@
   .textlink:hover span{background-size:100% 1px}
 
   /* header */
-  header{position:fixed;top:0;left:0;right:0;z-index:50;transition:background .5s var(--ease),box-shadow .5s var(--ease),padding .5s var(--ease)}
+  header{position:fixed;top:0;left:0;right:0;z-index:50;will-change:transform;transition:transform .55s var(--ease),background .5s var(--ease),box-shadow .5s var(--ease),padding .5s var(--ease)}
   header .bar{max-width:var(--container);margin:0 auto;padding:26px 40px;display:flex;align-items:center;justify-content:space-between;transition:padding .5s var(--ease)}
   .brand{display:flex;flex-direction:column;line-height:1}
   .brand .name{font-family:'Playfair Display',serif;font-size:23px;font-weight:500;letter-spacing:.01em}
   .brand .name sup{font-size:9px;vertical-align:super;opacity:.6}
   .brand .tag{font-size:9.5px;letter-spacing:.28em;text-transform:uppercase;color:var(--stone);margin-top:5px}
   nav.links{display:flex;align-items:center;gap:38px}
-  nav.links a{font-size:13px;letter-spacing:.04em;color:var(--ink-soft);transition:color .4s}
+  nav.links a{position:relative;font-size:13px;letter-spacing:.04em;color:var(--ink-soft);transition:color .4s}
   nav.links a:hover{color:var(--ink)}
   header.on-dark .brand .name,header.on-dark nav.links a{color:var(--paper)}
   header.on-dark .brand .tag{color:rgba(251,249,243,.62)}
@@ -130,9 +130,9 @@
   .sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:32px;flex-wrap:wrap;margin-bottom:56px}
   .sec-head h2{font-weight:400;font-size:clamp(2rem,4vw,3.4rem);line-height:1.04;letter-spacing:-.02em}
   .sec-head p{max-width:34ch;color:var(--stone);font-size:15px}
-  .index-row{display:grid;grid-template-columns:70px 1.1fr 1.5fr auto;gap:28px;align-items:center;padding:34px 0;border-top:1px solid var(--line);transition:padding .5s var(--ease)}
+  .index-row{display:grid;grid-template-columns:40px 1.1fr 1.5fr auto;gap:28px;align-items:center;padding:34px 0;border-top:1px solid var(--line);transition:padding .5s var(--ease)}
   .index-row:last-child{border-bottom:1px solid var(--line)}
-  .index-row .no{font-size:13px;color:var(--faint);letter-spacing:.1em}
+  .index-row .no{display:block;width:8px;height:8px;border-radius:50%;background:var(--faint);transition:background .45s var(--ease),transform .5s var(--ease)}
   .index-row .ttl{font-family:'Playfair Display',serif;font-size:clamp(1.5rem,2.4vw,2.1rem);font-weight:400;transition:color .4s}
   .index-row .desc{color:var(--stone);font-size:15px;line-height:1.55}
   .index-row .go{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;color:var(--ink);transition:all .5s var(--ease);justify-self:end}
@@ -195,7 +195,7 @@
   .contact h2{font-weight:400;font-size:clamp(2.4rem,5vw,4.4rem);line-height:1.02;letter-spacing:-.02em}
   .contact .detail{margin-top:34px;display:flex;flex-direction:column;gap:18px}
   .contact .detail a{display:flex;align-items:center;gap:14px;font-size:17px}
-  .contact .detail .ic{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:all .4s}
+  .contact .detail .ic{width:44px;height:44px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;transition:transform .5s var(--ease),background .4s,color .4s,border-color .4s}
   .contact .detail a:hover .ic{background:var(--ink);color:var(--paper);border-color:var(--ink)}
   form{background:var(--paper);border:1px solid var(--line);border-radius:6px;padding:36px;box-shadow:var(--shadow)}
   .field{margin-bottom:18px}
@@ -213,7 +213,7 @@
   footer .brand .name{color:var(--paper)}
   footer p.desc{margin-top:18px;max-width:38ch;font-size:15px;line-height:1.6}
   footer .social{margin-top:24px;display:flex;gap:12px}
-  footer .social a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line-light);display:grid;place-items:center;color:var(--paper);transition:all .4s}
+  footer .social a{width:42px;height:42px;border-radius:50%;border:1px solid var(--line-light);display:grid;place-items:center;color:var(--paper);transition:transform .5s var(--ease),background .45s,border-color .45s}
   footer .social a:hover{background:var(--accent-deep);border-color:var(--accent-deep)}
   footer .col h4{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:rgba(251,249,243,.72);margin-bottom:18px}
   footer .col a{display:block;padding:7px 0;font-size:15px;color:rgba(251,249,243,.72);transition:color .4s}
@@ -222,6 +222,24 @@
   footer .wordmark{font-family:'Playfair Display',serif;font-weight:500;font-size:19vw;line-height:.8;letter-spacing:-.03em;color:rgba(251,249,243,.05);text-align:center;padding-bottom:24px;white-space:nowrap}
 
   a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:3px}
+
+  /* Lenis smooth scroll */
+  html.lenis,html.lenis body{height:auto}
+  .lenis.lenis-smooth{scroll-behavior:auto!important}
+  .lenis.lenis-smooth [data-lenis-prevent]{overscroll-behavior:contain}
+  .lenis.lenis-stopped{overflow:hidden}
+  /* nav hide/show smoothing */
+  header.nav-hidden{transform:translateY(-100%)}
+  /* animated underline on nav links (excludes the CTA button) */
+  nav.links a:not(.nav-cta)::after{content:"";position:absolute;left:0;bottom:-5px;height:1.5px;width:100%;background:currentColor;transform:scaleX(0);transform-origin:left center;transition:transform .5s var(--ease)}
+  nav.links a:not(.nav-cta):hover::after,nav.links a.active:not(.nav-cta)::after{transform:scaleX(1)}
+  /* smooth icon hovers */
+  footer .social a:hover{transform:translateY(-4px) scale(1.05)}
+  .contact .detail a:hover .ic{transform:scale(1.08)}
+  /* index-row dot marker hover */
+  .index-row:hover .no{background:var(--accent);transform:scale(1.4)}
+  /* gentle image parallax */
+  .feature img[data-parallax]{top:-20%;height:140%;bottom:auto;will-change:transform}
 
   /* founder portrait */
   .founder .card .portrait{width:100%;height:320px;object-fit:cover;object-position:center 22%;border-radius:4px;margin-bottom:26px}
@@ -349,25 +367,25 @@
     </div>
 
     <a href="#solutions" class="index-row reveal">
-      <span class="no">01</span>
+      <span class="no" aria-hidden="true"></span>
       <span class="ttl serif">HR Solutions</span>
       <span class="desc">High-touch, fully customized human resources that flex with your team, from handbooks to hard conversations.</span>
       <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
     </a>
     <a href="#solutions" class="index-row reveal">
-      <span class="no">02</span>
+      <span class="no" aria-hidden="true"></span>
       <span class="ttl serif">Interim Support</span>
       <span class="desc">A leave, a surge, a vacancy. Drop in a seasoned HR professional to hold the line, on-site or virtual, for as long as you need.</span>
       <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
     </a>
     <a href="#resiliency" class="index-row reveal">
-      <span class="no">03</span>
+      <span class="no" aria-hidden="true"></span>
       <span class="ttl serif">Organizational Effectiveness</span>
       <span class="desc">Culture change, leadership development, and team collaboration for the C-suite, solved from the inside.</span>
       <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
     </a>
     <a href="#resiliency" class="index-row reveal">
-      <span class="no">04</span>
+      <span class="no" aria-hidden="true"></span>
       <span class="ttl serif">Stress-Resiliency</span>
       <span class="desc">For athletes, executives, and high achievers who cannot afford to falter. Train body and mind to hold up under pressure.</span>
       <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M7 17L17 7M8 7h9v9"/></svg></span>
@@ -377,7 +395,7 @@
 
 <!-- FEATURE / RESILIENCY -->
 <section class="feature" id="resiliency">
-  <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=2400&q=80" alt="Aerial view of the ocean" loading="lazy" />
+  <img src="https://images.unsplash.com/photo-1505142468610-359e7d316be0?auto=format&fit=crop&w=2400&q=80" alt="Aerial view of the ocean" loading="lazy" data-parallax="0.4" />
   <div class="fc">
     <div class="eyebrow reveal">(03) · Stress-Resiliency</div>
     <h2 class="serif reveal d1">For the people the pressure <em>never lets up on.</em></h2>
@@ -507,20 +525,61 @@
   <div class="wordmark" aria-hidden="true">Expert Effect</div>
 </footer>
 
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.14/dist/lenis.min.js"></script>
 <script>
-  // scroll-aware header (dark over hero, solid after)
+  const prefersReduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // scroll-aware header (dark over hero, solid after) + progress + nav hide/show
   const header = document.getElementById('header');
   const hero = document.getElementById('top');
   const progress = document.getElementById('progress');
   const docEl = document.documentElement;
+  let lastY = 0;
   function onScroll(){
-    const past = window.scrollY > (hero.offsetHeight - 90);
+    const y = window.scrollY;
+    const past = y > (hero.offsetHeight - 90);
     header.classList.toggle('scrolled', past);
     header.classList.toggle('on-dark', !past);
     const max = docEl.scrollHeight - docEl.clientHeight;
-    progress.style.width = (max > 0 ? (window.scrollY / max) * 100 : 0) + '%';
+    progress.style.width = (max > 0 ? (y / max) * 100 : 0) + '%';
+    if (!prefersReduced){
+      if (y > hero.offsetHeight * 0.55 && y > lastY + 4) header.classList.add('nav-hidden');
+      else if (y < lastY - 4 || y < hero.offsetHeight * 0.55) header.classList.remove('nav-hidden');
+    }
+    lastY = y;
+    updateParallax();
   }
-  onScroll(); addEventListener('scroll', onScroll, {passive:true});
+  addEventListener('scroll', onScroll, {passive:true});
+
+  // gentle image parallax (transform-based, GPU)
+  const parallaxEls = document.querySelectorAll('[data-parallax]');
+  function updateParallax(){
+    if (prefersReduced) return;
+    const vh = window.innerHeight;
+    parallaxEls.forEach(el=>{
+      const r = el.parentElement.getBoundingClientRect();
+      if (r.bottom < -60 || r.top > vh + 60) return;
+      const prog = (r.top + r.height/2 - vh/2) / (vh/2 + r.height/2);
+      const speed = parseFloat(el.dataset.parallax) || 0.3;
+      el.style.transform = 'translate3d(0,' + (prog * speed * 100).toFixed(1) + 'px,0)';
+    });
+  }
+
+  // Lenis smooth scroll (whole page); native anchors routed through Lenis
+  if (!prefersReduced && window.Lenis){
+    const lenis = new Lenis({ duration: 1.05, easing: t=>Math.min(1, 1.001 - Math.pow(2, -10*t)), smoothWheel: true });
+    function raf(t){ lenis.raf(t); requestAnimationFrame(raf); }
+    requestAnimationFrame(raf);
+    lenis.on('scroll', onScroll);
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click', e=>{
+        const h = a.getAttribute('href');
+        if (h.length > 1){ const el = document.querySelector(h); if (el){ e.preventDefault(); lenis.scrollTo(el, {offset:-72, duration:1.1}); } }
+      });
+    });
+  }
+  onScroll(); updateParallax();
+  addEventListener('resize', updateParallax, {passive:true});
 
   // animated stat counters
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
